@@ -1,16 +1,16 @@
 #include "SchoolManagerSystem.h"
 #include <limits>
+using namespace PA4;
 
 int main()
 {
-    int selection;
-    int select_student;
-    int select_course;
-    int select_list_student;
-    SchoolManagerSystem sms;
-    do
+    int selection; // main menu selection
+    int select_student; // student menu selection
+    int select_course; // course menu selection
+    SchoolManagerSystem sms; // system object
+    do // main menu loop
     {
-        while(1)
+        while(1) // input control
         {
             cout << "0 exit\n" << "1 student\n" << "2 course\n" << "3 list_all_students\n" << "4 list_all_courses\n";
             cout << "<< ";
@@ -25,9 +25,9 @@ int main()
         }
         if (selection == 1)
         {
-            do
+            do // student menu loop
             {
-                while (1)
+                while (1) // input control
                 {
                     cout << "0 up\n" << "1 add_student\n" << "2 select_student\n";
                     cout << "<< ";
@@ -40,26 +40,26 @@ int main()
                     if (!cin.fail() && (select_student >= 0 && select_student <= 2))
                         break;
                 }
-                if (select_student == 1)
+                if (select_student == 1) // add_student
                 {
                     string name;
                     string input;
                     unsigned int id;
-                    string str_id;
-                    while (1)
+                    string str_id; // to take id as string from input
+                    while (1) // input control
                     {
                         cout << "<< ";
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(),'\n');
-                        getline(cin, input);
+                        getline(cin, input); // getting inpus as one line
                         int index = 0;
-                        while (!(input[index] >= 48 && input[index] <= 57))
+                        while (!(input[index] >= 48 && input[index] <= 57)) // name part of string
                         {
                             name.push_back(input[index]);
                             index++;
                         }
                         str_id = "";
-                        while (index < input.size())
+                        while (index < input.size()) // id part of string
                         {
                             str_id.push_back(input[index]);
                             index++;
@@ -76,14 +76,14 @@ int main()
                     }
                     sms.add_student(name, id);
                 }
-                else if (select_student == 2)
+                else if (select_student == 2) // select student
                 {
                     string name;
                     string input;
                     unsigned int id;
                     string str_id;
-                    int student_subselect;
-                    int course_to_select;
+                    int student_subselect; // select student menu
+                    int course_to_select; // course number that will be operated
                     while (1)
                     {
                         cout << "<< ";
@@ -112,7 +112,7 @@ int main()
                         if (!cin.fail())
                             break;
                     }
-                    do
+                    do // select student menu loop
                     {
                         while (1)
                         {
@@ -127,12 +127,12 @@ int main()
                             if (!cin.fail() && (student_subselect >= 0 && student_subselect <= 4 && student_subselect != 2))
                                 break;
                         }
-                        if (student_subselect == 1)
+                        if (student_subselect == 1) // delete student
                         {
                             sms.delete_student(name, id);
                             break;
                         }
-                        else if (student_subselect == 3)
+                        else if (student_subselect == 3) // add_selected_student_to_a_course
                         {
                             sms.decide_courses_not_taken(name, id);
                             while (1)
@@ -153,7 +153,7 @@ int main()
                                 break;
                             sms.add_selected_student_to_a_course(name, id, course_to_select);
                         }
-                        else if (student_subselect == 4)
+                        else if (student_subselect == 4) // drop_selected_student_from_a_course
                         {
                             sms.list_cources_that_is_taken(name, id);
                             while (1)
@@ -178,9 +178,9 @@ int main()
                 }
             }while(select_student);
         }
-        else if (selection == 2)
+        else if (selection == 2) // course
         {
-            do
+            do // course menu loop
             {
                 while (1)
                 {
@@ -207,12 +207,12 @@ int main()
                         cin.ignore(numeric_limits<streamsize>::max(),'\n');
                         getline(cin, input);
                         int index = 0;
-                        while (input[index] != ' ')
+                        while (input[index] != ' ') // code part of the input
                         {
                             code.push_back(input[index]);
                             index++;
                         }
-                        while (index < input.size())
+                        while (index < input.size()) // name part of the input
                         {
                             name.push_back(input[index]);
                             index++;
@@ -258,7 +258,7 @@ int main()
                         if (!cin.fail())
                             break;
                     }
-                    do
+                    do // select course menu loop
                     {
                         while (1)
                         {
