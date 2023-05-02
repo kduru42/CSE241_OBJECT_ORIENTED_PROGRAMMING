@@ -32,6 +32,11 @@ class SchoolManagerSystem
         void add_course(const string code, const string name);
         void delete_course(const string code, const string name);
         void list_all_courses() const;
+        void decide_courses_not_taken(const string name, const unsigned int id);
+        void add_selected_student_to_a_course(const string name, const unsigned int id, const int course_num);
+        void drop_selected_student_from_a_course(const string name, const unsigned int id, const int course_num);
+        void list_cources_that_is_taken(const string name, const unsigned int id);
+        void list_students_registered_to_the_selected_course(const string code, const string name);
 };
 
 

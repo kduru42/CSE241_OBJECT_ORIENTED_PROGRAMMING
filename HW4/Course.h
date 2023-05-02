@@ -12,7 +12,8 @@ class Course
         string name;
         string code;
         Student* students;
-        int count;
+        int student_count;
+        int student_capacity;
 
     public:
         Course();
@@ -20,12 +21,13 @@ class Course
         Course(const Course& other);
         Course& operator=(const Course& other);
         ~Course();
-        inline int get_count() const {return (count);};
+        inline int &get_count() {return (student_count);};
+        inline int &get_capacity() {return (student_capacity);};
         inline string get_name() const {return (name);};
         inline void set_name(const string n) {name = n;};
         inline string get_code() const {return (code);};
         inline void set_code(const string c) {code = c;};
-        inline Student* get_students() const {return (students);};
+        inline Student* &get_students() {return (students);};
 
 };
 

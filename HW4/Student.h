@@ -14,7 +14,10 @@ class Student
         string name;
         unsigned int id;
         Course *courses;
-        int count;
+        Course *courses_not_taken;
+        int course_count;
+        int course_capacity;
+        int not_taken_course_count;
 
     public:
         Student();
@@ -22,12 +25,15 @@ class Student
         ~Student();
         Student(const Student& other);
         Student& operator=(const Student& other);
-        inline int get_count() const {return (count);};
+        inline int &get_count() {return (course_count);};
+        inline int &get_capacity() {return (course_capacity);};
+        inline int &get_not_taken_count() {return (not_taken_course_count);};
         inline string get_name() const {return (name);};
         inline void set_name(const string n) {name = n;};
         inline unsigned int get_id() const {return (id);};
         inline void set_id(const unsigned int i) {id = i;};
-        inline Course* get_courses() const {return (courses);};
+        inline Course* &get_courses() {return (courses);};
+        inline Course* &get_courses_not_taken() {return (courses_not_taken);};
 
 };
 

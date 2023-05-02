@@ -83,6 +83,7 @@ int main()
                     unsigned int id;
                     string str_id;
                     int student_subselect;
+                    int course_to_select;
                     while (1)
                     {
                         cout << "<< ";
@@ -133,7 +134,45 @@ int main()
                         }
                         else if (student_subselect == 3)
                         {
-
+                            sms.decide_courses_not_taken(name, id);
+                            while (1)
+                            {
+                                cout << "<< ";
+                                cin >> course_to_select;
+                                if (course_to_select == 0)
+                                    break;
+                                if (cin.fail() || (course_to_select < 0))
+                                {
+                                    cin.clear();
+                                    cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                                }
+                                if (!cin.fail() && (select_student >= 0))
+                                    break;
+                            }
+                            if (course_to_select == 0)
+                                break;
+                            sms.add_selected_student_to_a_course(name, id, course_to_select);
+                        }
+                        else if (student_subselect == 4)
+                        {
+                            sms.list_cources_that_is_taken(name, id);
+                            while (1)
+                             {
+                                 cout << "<< ";
+                                 cin >> course_to_select;
+                                 if (course_to_select == 0)
+                                     break;
+                                 if (cin.fail() || (course_to_select < 0))
+                                 {
+                                     cin.clear();
+                                     cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                                 }
+                                 if (!cin.fail() && (select_student >= 0))
+                                     break;
+                             }
+                             if (course_to_select == 0)
+                                 break;
+                             sms.drop_selected_student_from_a_course(name, id, course_to_select);
                         }
                     }while(student_subselect);
                 }
@@ -226,12 +265,12 @@ int main()
                             cout << "0 up\n" << "1 delete_course\n" << "2 list_students_registered_to_the_selected_course\n";
                             cout << ">> ";
                             cin >> course_subselect;
-                            if (cin.fail() || (course_subselect < 0 || course_subselect > 4 || course_subselect == 2))
+                            if (cin.fail() || (course_subselect < 0 || course_subselect > 2))
                             {
                                 cin.clear();
                                 cin.ignore(numeric_limits<streamsize>::max(),'\n');    
                             }
-                            if (!cin.fail() && (course_subselect >= 0 && course_subselect <= 4 && course_subselect != 2))
+                            if (!cin.fail() && (course_subselect >= 0 && course_subselect <= 2))
                                 break;
                         }
                         if (course_subselect == 1)
@@ -239,10 +278,8 @@ int main()
                             sms.delete_course(code, name);
                             break;
                         }
-                        else if (course_subselect == 3)
-                        {
-
-                        }
+                        else if (course_subselect == 2)
+                            sms.list_students_registered_to_the_selected_course(code, name);
                     }while(course_subselect);
                 }
             }while(select_course);
